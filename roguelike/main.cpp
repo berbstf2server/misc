@@ -2,7 +2,6 @@
 #include <string.h>
 using namespace std;
 
-cout << test << endl;
 char map[5][7] = {
 	{'#', '#', '#', '#', '#', '#', '#'},
 	{'#', '.', '.', '.', '.', '.', '#'},
@@ -62,10 +61,101 @@ void printMap()
 
 int main()
 {
-	printMap();
-	map[2][3] = '@';
-	cout << endl;
-	printMap();
+	int y = 2;
+	int x = 3;
+	
+	map[y][x] = '@';
 
-	return 0;
+	printMap();
+	
+	positionInput:
+	char movementDirection = '\0';
+	map[y][x] = '.';
+    cout << "Enter the direction you want to move (w,a,s,d): or 'q' to quit: ";
+	cin >> movementDirection;
+
+	//Forward
+	if(movementDirection == 'w')
+	{
+		y = --y;
+		if(map[y][x] == '#')
+		{
+			cout << "Thats a wall dummy!" << endl;
+			y = ++y;
+			goto positionInput;
+		}
+		else
+		{
+			map[y][x] = '@';	
+			printMap();
+			goto positionInput;
+		}
+	}	
+
+
+	//Backward
+	if(movementDirection == 's')
+	{
+		y = ++y;
+		if(map[y][x] == '#')
+		{
+			cout << "Thats a wall dummy!" << endl;
+			y = --y;
+			goto positionInput;
+		}
+		else
+		{
+			map[y][x] = '@';	
+			printMap();
+			goto positionInput;
+		}
+	}	
+
+
+
+	//Left
+	if(movementDirection == 'a')
+	{
+		x = --x;
+		if(map[y][x] == '#')
+		{
+			cout << "Thats a wall dummy!" << endl;
+			x = ++x;
+			goto positionInput;
+		}
+		else
+		{
+			map[y][x] = '@';	
+			printMap();
+			goto positionInput;
+		}
+	}	
+
+
+	//Right
+	if(movementDirection == 'd')
+	{
+		x = ++x;
+		if(map[y][x] == '#')
+		{
+			cout << "Thats a wall dummy!" << endl;
+			x = --x;
+			goto positionInput;
+		}
+		else
+		{
+			map[y][x] = '@';	
+			printMap();
+			goto positionInput;
+		}
+	}	
+	
+	//Quit
+	else if(movementDirection == 'q')
+		return 0;
+	else
+	{
+		cout << "Invalid input, try again" << endl;
+		goto positionInput;
+	}
 }
