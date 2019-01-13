@@ -3,22 +3,22 @@
 #include <string.h>
 using namespace std;
 
-int main()
-{
-	const int ROWS = 7;
-	const int COLUMNS = 7;
 
-	char test[ROWS][COLUMNS] = {
+const int ROWS = 7;
+const int COLUMNS = 7;
+
+char test[ROWS][COLUMNS] = 
+{
 	{'#', '#', '#', '#', '#', '#', '#'},
 	{'#', '.', '.', '.', '.', '.', '#'},
 	{'#', '.', '.', '@', '.', '.', '#'},
 	{'#', '.', '.', '.', '.', '.', '#'},
 	{'#', '#', '#', '#', '#', '#', '#'}
-	};
+};
 
-	initscr();	
-	curs_set(0);
 
+void printMap()
+{
 	for (int row = 0; row < ROWS; ++row)
 	{
 		printw("\n");
@@ -27,7 +27,15 @@ int main()
 			printw("%c", test[row][column]);	
 		}
 	}
-	
+};
+
+int main()
+{
+	initscr();	
+	curs_set(0);
+
+	printMap();
+
 	refresh();
 	getch();
 
